@@ -19,14 +19,16 @@ jobs:
       - name:
         shell: bash
         run: |
+          pwd
+      - name:
+        shell: bash
+        run: |
           df -h
           df -k /tmp
       - name: Create build user
         run: |
           useradd -m build
-          mkdir -p /tmp/src
-          cp -vR linux /tmp/src/linux
-          chown -vR build /tmp/src/linux
+          chown -vR build .
       - name: Set up pacman keyring
         run: |
           pacman-key --init
@@ -36,15 +38,10 @@ jobs:
         run: |
           pacman -Syu --noconfirm bc cpio pahole python kmod
           pacman -Scc --noconfirm
-      - name:
-        shell: bash
-        run: |
-          df -h
-          df -k /tmp
       - name: Prepare sources
         shell: bash
         run: |
-          su build bash -c "cd /tmp/src/linux && makepkg --nobuild"
+          su build bash -c "makepkg --nobuild"
       - name:
         shell: bash
         run: |
