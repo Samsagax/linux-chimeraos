@@ -12,8 +12,10 @@ jobs:
   test-integration:
     runs-on: ubuntu-latest
 
-    container: archlinux:base-devel
-
+    container: 
+      image: archlinux:base-devel
+      volumes:
+        - /tmp:/tmp
     steps:
       - uses: actions/checkout@v3
       - name: Create build user
@@ -33,3 +35,9 @@ jobs:
         shell: bash
         run: |
           su build bash -c "cd /home/build/linux && makepkg --nobuild"
+      - name:
+        shell: bash
+        run: |
+          df -h
+          df -k /tmp
+
