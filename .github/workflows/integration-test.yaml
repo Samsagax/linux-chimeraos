@@ -26,6 +26,7 @@ jobs:
       - name: Create build user
         run: |
           useradd -m build
+          mkdir -p /tmp/src
           cp -vR linux /tmp/src/linux
           chown -vR build /tmp/src/linux
       - name: Set up pacman keyring
