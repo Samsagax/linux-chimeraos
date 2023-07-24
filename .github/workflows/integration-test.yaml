@@ -41,7 +41,7 @@ jobs:
       - name: Prepare sources
         shell: bash
         run: |
-          su build bash -c "makepkg --nobuild"
+          su build bash -c "cd linux && makepkg --nobuild"
       - name:
         shell: bash
         run: |
