@@ -14,15 +14,13 @@ jobs:
 
     container:
       image: archlinux:base-devel
-      volumes:
-        - /tmp:/tmp
     steps:
       - uses: actions/checkout@v3
       - name:
         shell: bash
         run: |
           df -h
-          df -hk /tmp
+          df -k /tmp
       - name: Create build user
         run: |
           useradd -m build
@@ -38,6 +36,11 @@ jobs:
         run: |
           pacman -Syu --noconfirm bc cpio pahole python kmod
           pacman -Scc --noconfirm
+      - name:
+        shell: bash
+        run: |
+          df -h
+          df -k /tmp
       - name: Prepare sources
         shell: bash
         run: |
