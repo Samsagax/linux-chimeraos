@@ -8,6 +8,7 @@ on:
 env:
   PKGDEST: "/tmp/linux-chimeraos"
   BUILDDIR: "/tmp/build"
+  SRCDEST: "/tmp/src/"
 
 jobs:
   build-kernel:
