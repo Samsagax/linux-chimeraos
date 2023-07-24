@@ -27,6 +27,8 @@ jobs:
 
     container:
       image: archlinux:base-devel
+      volumes:
+        - ${PWD}:/home/build
     steps:
       - uses: actions/checkout@v3
         with:
