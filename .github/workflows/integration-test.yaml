@@ -12,12 +12,17 @@ jobs:
   test-integration:
     runs-on: ubuntu-latest
 
-    container: 
+    container:
       image: archlinux:base-devel
       volumes:
         - /tmp:/tmp
     steps:
       - uses: actions/checkout@v3
+      - name:
+        shell: bash
+        run: |
+          df -h
+          df -hk /tmp
       - name: Create build user
         run: |
           useradd -m build
@@ -31,6 +36,7 @@ jobs:
       - name: Install dependencies
         run: |
           pacman -Syu --noconfirm bc cpio pahole python kmod
+          pacman -Scc --noconfirm
       - name: Prepare sources
         shell: bash
         run: |
@@ -39,5 +45,5 @@ jobs:
         shell: bash
         run: |
           df -h
-          df -k /tmp
+          df -hk /tmp
 
