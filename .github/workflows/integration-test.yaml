@@ -26,8 +26,8 @@ jobs:
       - name: Create build user
         run: |
           useradd -m build
-          cp -vR linux /home/build/linux
-          chown -vR build /home/build/linux
+          cp -vR linux /tmp/src/linux
+          chown -vR build /tmp/src/linux
       - name: Set up pacman keyring
         run: |
           pacman-key --init
@@ -40,7 +40,7 @@ jobs:
       - name: Prepare sources
         shell: bash
         run: |
-          su build bash -c "cd /home/build/linux && makepkg --nobuild"
+          su build bash -c "cd /tmp/src/linux && makepkg --nobuild"
       - name:
         shell: bash
         run: |
